@@ -4,16 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Isabela Moreira",
   "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
   "dependencies": {
     "axios": "^0.27.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "nodemon": "^2.0.16"
+    "joi": "^17.6.0",
+    "mongodb": "^4.6.0"
   }
 }
