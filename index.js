@@ -1,8 +1,8 @@
 import express, {json} from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import choiceRouter from "./routes/choiceRouter";
-import pollRouter from "./routes/pollRouter";
+import choiceRouter from "./routes/choiceRouter.js";
+import pollRouter from "./routes/pollRouter.js";
 
 const app = express();
 app.use(json());
