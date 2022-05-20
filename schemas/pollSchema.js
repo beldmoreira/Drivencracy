@@ -2,7 +2,7 @@ import joi from "joi";
 
 const pollSchema = joi.object({
     title: joi.string().required(),
-    expireAt: joi.date()
+    expireAt: joi.string()
 });
 
 export default pollSchema;
