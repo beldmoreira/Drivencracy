@@ -1,5 +1,5 @@
 import connection from "../db.js";
-import choiceSchema from "../db.js"
+import choiceSchema from "../schemas/choiceSchema.js";
 import { ObjectId } from "mongodb";
 
 
@@ -9,6 +9,7 @@ export async function publishChoice(req,res){
     let pollCreated;
 
     try {
+        const { mongoClient, db } = await connection();
         const id = ObjectId(choice.pollId);
         pollCreated = await db.collection("polls").findOne({ _id: id });
 
@@ -52,10 +53,23 @@ export async function publishChoice(req,res){
     };
 
 export async function postVote(req,res){
+    const idChoice = new ObjectId(req.params.id);
 
-
-
-};
-
+    try {
+        const { mongoClient, db } = await connection();
+        const thereIsChoice = await db.collection('choices').findOne({_id: idChoice});
+        if(!thereIsChoice) {
+            return res.sendStatus(404);
+        }
+       
+        const insertVote = await db.collection('votes').insertOne({vote: idChoice, date: Date.now(), poolId: thereIsChoice.poolId});
+        if(insertVote){  
+            res.sendStatus(201);
+        }
+        await mongoClient.close(); 
+    } catch (error) {
+        res.sendStatus(500);
+    }
+}
 
 
